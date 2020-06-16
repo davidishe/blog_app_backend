@@ -1,3 +1,4 @@
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
@@ -7,6 +8,7 @@ using MyAppBack.Data.Spec;
 using MyAppBack.Data.UnitOfWork;
 using MyAppBack.Models;
 using MyAppBack.Models.OrderAggregate;
+using MyAppBack.Services.PaymentService;
 
 namespace MyAppBack.Services.OrderService
 {
@@ -14,8 +16,10 @@ namespace MyAppBack.Services.OrderService
   {
     private readonly IBasketRepository _basketRepo;
     private readonly IUnitOfWork _unitOfWork;
-    public OrderService(IUnitOfWork unitOfWork, IBasketRepository basketRepo)
+    private readonly IPaymentService _paymentService;
+    public OrderService(IUnitOfWork unitOfWork, IBasketRepository basketRepo, IPaymentService paymentService)
     {
+      _paymentService = paymentService;
       _unitOfWork = unitOfWork;
       _basketRepo = basketRepo;
     }
@@ -30,8 +34,8 @@ namespace MyAppBack.Services.OrderService
       foreach (var item in basket.Items)
       {
         var productItem = await _unitOfWork.Repository<Product>().GetByIdAsync(item.Id);
-        var itemOrdered = new ProductItemOrdered(productItem.Id, productItem.Name, productItem.PictureUrl);
-        var orderItem = new OrderItem(itemOrdered, productItem.ProductPrice, item.Quantity);
+        var itemOrdered = new ProductItemOrdered(productItem.Id, productItem.Name, productItem.PictureUrl, productItem.GuId);
+        var orderItem = new OrderItem(itemOrdered, productItem.Price, item.Quantity, item.GuId);
         items.Add(orderItem);
       }
 
@@ -39,18 +43,24 @@ namespace MyAppBack.Services.OrderService
       var deliveryMethod = await _unitOfWork.Repository<DeliveryMethod>().GetByIdAsync(deliveryMethodId);
 
       // calc subtotal
-      var subtotal = items.Sum(item => item.Price * item.Quantity);
+      var subtotal = items.Sum(item => (item.Price * item.Quantity));
+
+      // check paymentIntentId already exists
+      var spec = new OrderByPaymentIntentIdSpecification(basket.PaymentIntentId);
+      var existingOrder = await _unitOfWork.Repository<Order>().GetEntityWithSpec(spec);
+      if (existingOrder != null)
+      {
+        _unitOfWork.Repository<Order>().Delete(existingOrder);
+        await _paymentService.CreateOrUpdatePaymentIntent(basket.PaymentIntentId);
+      }
 
       // create order
-      var order = new Order(byerEmail, shipingAddress, deliveryMethod, items, subtotal);
+      var order = new Order(byerEmail, shipingAddress, deliveryMethod, items, subtotal, basket.PaymentIntentId);
       _unitOfWork.Repository<Order>().Add(order);
 
       // TO DO: save to db
       var result = await _unitOfWork.Complete();
       if (result <= 0) return null;
-
-      // delete basket
-      await _basketRepo.DeleteBasketAsync(basketId);
 
       // return order
       return order;

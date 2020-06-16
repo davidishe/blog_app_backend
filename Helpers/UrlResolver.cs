@@ -22,9 +22,7 @@ namespace MyAppBack.Helpers
     {
       if (!string.IsNullOrEmpty(source.PictureUrl))
       {
-        // return _config["ApiUrl"] + source.PictureUrl;
         return source.PictureUrl;
-
       }
       return null;
     }

@@ -7,7 +7,7 @@ using Microsoft.Extensions.Configuration;
 using Microsoft.IdentityModel.Tokens;
 using MyAppBack.Identity;
 
-namespace MyAppBack.Services.Token
+namespace MyAppBack.Services.TokenService
 {
   public class TokenService : ITokenService
   {

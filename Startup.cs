@@ -1,15 +1,15 @@
+using System.IO;
 using AutoMapper;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
+using Microsoft.Extensions.FileProviders;
 using MyAppBack.Data;
 using MyAppBack.Data.Contexts;
 using MyAppBack.Extensions;
-using MyAppBack.Helpers;
 using MyAppBack.Middleware;
-using MyAppBack.Models;
 using StackExchange.Redis;
 
 namespace MyAppBack
@@ -35,16 +35,15 @@ namespace MyAppBack
 
     public void ConfigureProductionServices(IServiceCollection services)
     {
-      services.AddDbContext<DataDbContext>(options => options.UseSqlServer(_config.GetConnectionString("DefaultConnection")));
+      services.AddDbContext<DataDbContext>(options => options.UseMySql(_config.GetConnectionString("DefaultConnection")));
+      services.AddDbContext<AppIdentityDbContext>(options => options.UseMySql(_config.GetConnectionString("IdentityConnection")));
+
 
       ConfigureServices(services);
     }
 
     public void ConfigureServices(IServiceCollection services)
     {
-
-      var appSettings = _config.GetSection("AppSettings");
-      services.Configure<AppSettings>(appSettings);
 
       services.AddSingleton<IConnectionMultiplexer>(c =>
       {
@@ -60,13 +59,7 @@ namespace MyAppBack
         });
 
       services.AddCors();
-      var mappingConfig = new MapperConfiguration(mc =>
-      {
-        mc.AddProfile(new AutoMapperProfiles());
-      });
 
-      IMapper mapper = mappingConfig.CreateMapper();
-      services.AddSingleton(mapper);
       services.AddAutoMapper(typeof(Startup));
 
       services.AddIdentityServices(_config);
@@ -87,6 +80,13 @@ namespace MyAppBack
       app.UseAuthorization();
       app.UseDefaultFiles();
       app.UseStaticFiles();
+      app.UseStaticFiles(new StaticFileOptions
+      {
+        FileProvider = new PhysicalFileProvider(
+          Path.Combine(Directory.GetCurrentDirectory(), "assets")
+        ),
+        RequestPath = "/assets"
+      });
       app.UseEndpoints(endpoints =>
       {
         endpoints.MapControllers();

@@ -24,6 +24,8 @@ namespace MyAppBack.Data.SeedData
             DisplayName = "David",
             Email = "david@david.com",
             UserName = "david@david.com",
+            UserPhoto = "assets/users/hopkins.png",
+            UserDescription = "Меня направляет божество и все такое",
             Address = new Address
             {
               FirstName = "David",

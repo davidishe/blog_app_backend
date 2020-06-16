@@ -6,16 +6,18 @@ namespace MyAppBack.Models.OrderAggregate
     {
     }
 
-    public ProductItemOrdered(int productItemId, string productName, string pictureUrl)
+    public ProductItemOrdered(int productItemId, string productName, string pictureUrl, int guId)
     {
       ProductItemId = productItemId;
-      ProductName = productName;
+      Name = productName;
       PictureUrl = pictureUrl;
+      GuId = guId;
     }
 
     public int ProductItemId { get; set; }
-    public string ProductName { get; set; }
+    public string Name { get; set; }
     public string PictureUrl { get; set; }
+    public int GuId { get; set; }
 
   }
 }

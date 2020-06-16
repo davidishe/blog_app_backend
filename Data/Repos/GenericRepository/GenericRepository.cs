@@ -29,6 +29,12 @@ namespace MyAppBack.Data.Repos.GenericRepository
       return await _context.Set<T>().FindAsync(id);
     }
 
+    public async Task<Product> GetByGuIdAsync(int guiId)
+    {
+      return await _context.Products.Where(x => x.GuId == guiId).FirstOrDefaultAsync();
+    }
+
+
     public async Task<T> GetEntityWithSpec(ISpecification<T> spec)
     {
       return await ApplySpecification(spec).FirstOrDefaultAsync();
@@ -83,6 +89,8 @@ namespace MyAppBack.Data.Repos.GenericRepository
     {
       return SpecificationEvaluator<T>.GetQuery(_context.Set<T>().AsQueryable(), spec);
     }
+
+
 
     // end generic
 

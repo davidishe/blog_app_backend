@@ -13,20 +13,19 @@ namespace MyAppBack.Data.Spec
           (!userParams.typeId.HasValue || x.ProductTypeId == userParams.typeId)
         )
     {
-      AddInclude(x => x.ProductType);
-      AddInclude(x => x.ProductRegion);
-
-      ApplyPaging(userParams.PageSize * (userParams.PageIndex - 1), userParams.PageSize);
+      AddInclude(x => x.Type);
+      AddInclude(x => x.Region);
+      ApplyPaging(userParams.PageSize * (userParams.PageIndex), userParams.PageSize);
 
       if (!string.IsNullOrEmpty(userParams.sort))
       {
         switch (userParams.sort)
         {
           case "priceAsc":
-            AddOrderByAscending(p => p.ProductPrice);
+            AddOrderByAscending(p => p.Price);
             break;
           case "priceDesc":
-            AddOrderByDescending(s => s.ProductPrice);
+            AddOrderByDescending(s => s.Price);
             break;
           default:
             AddOrderByAscending(x => x.Name);
@@ -37,8 +36,8 @@ namespace MyAppBack.Data.Spec
 
     public ProductsWithTypesAndRegionsSpecification(int id) : base(x => x.Id == id)
     {
-      AddInclude(x => x.ProductType);
-      AddInclude(x => x.ProductRegion);
+      AddInclude(x => x.Type);
+      AddInclude(x => x.Region);
     }
   }
 }

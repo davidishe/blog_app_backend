@@ -8,6 +8,7 @@ namespace MyAppBack.Controllers
   public class BuggsController : BaseApiController
   {
     private readonly DataDbContext _context;
+    // var
 
     public BuggsController(DataDbContext context)
     {

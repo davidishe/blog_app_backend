@@ -13,6 +13,8 @@ namespace MyAppBack.Data.Repos.GenericRepository
     Task<T> GetEntityWithSpec(ISpecification<T> spec);
     Task<IReadOnlyList<T>> ListAsync(ISpecification<T> spec);
     Task<int> CountAsync(ISpecification<T> spec);
+    Task<Product> GetByGuIdAsync(int guiId);
+
 
     void Add(T entity);
     void Update(T entity);

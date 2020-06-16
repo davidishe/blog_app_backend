@@ -24,7 +24,6 @@ namespace MyAppBack.Controllers
     private readonly IGenericRepository<ProductRegion> _productRegionRepo;
     private readonly IMapper _mapper;
 
-
     public ProductsController(IGenericRepository<Product> productsRepo, IGenericRepository<ProductType> productTypeRepo, IGenericRepository<ProductRegion> productRegionRepo, IMapper mapper)
     {
       _productsRepo = productsRepo;
@@ -33,13 +32,13 @@ namespace MyAppBack.Controllers
       _mapper = mapper;
     }
 
+    // [Cached(600)]
     [AllowAnonymous]
     [HttpGet]
     [Route("all")]
-    public async Task<ActionResult<Pagination<ProductToReturnDto>>> GetDtoProducts([FromQuery]UserParams userParams)
+    public async Task<ActionResult<Pagination<ProductToReturnDto>>> GetDtoProducts([FromQuery] UserParams userParams)
     {
       var spec = new ProductsWithTypesAndRegionsSpecification(userParams);
-
       var specForCount = new ProductWithFiltersForCountSpecification(userParams);
       var totalItems = await _productsRepo.CountAsync(specForCount);
       var products = await _productsRepo.ListAsync(spec);
@@ -48,10 +47,11 @@ namespace MyAppBack.Controllers
       return Ok(new Pagination<ProductToReturnDto>(userParams.PageIndex, userParams.PageSize, totalItems, data));
     }
 
+    // [Cached(10)]
     [AllowAnonymous]
     [HttpGet("{id}")]
     [Route("product")]
-    public async Task<ActionResult<ProductToReturnDto>> GetProductByIdAsync([FromQuery]int id)
+    public async Task<ActionResult<ProductToReturnDto>> GetProductByIdAsync([FromQuery] int id)
     {
       var spec = new ProductsWithTypesAndRegionsSpecification(id);
       var product = await _productsRepo.GetEntityWithSpec(spec);
@@ -60,6 +60,18 @@ namespace MyAppBack.Controllers
 
     }
 
+    [AllowAnonymous]
+    [HttpGet("{guId}")]
+    [Route("getproductid")]
+    public async Task<ActionResult<ProductToReturnDto>> GetProductIdByGuIdAsync([FromQuery] int guId)
+    {
+      var product = await _productsRepo.GetByGuIdAsync(guId);
+      await SetTimeOut();
+      return _mapper.Map<Product, ProductToReturnDto>(product);
+    }
+
+
+    // [Cached(600)]
     [AllowAnonymous]
     [HttpGet]
     [Route("types")]
@@ -80,6 +92,7 @@ namespace MyAppBack.Controllers
       return Ok(product);
     }
 
+    // [Cached(600)]
     [AllowAnonymous]
     [HttpGet]
     [Route("regions")]
@@ -102,7 +115,7 @@ namespace MyAppBack.Controllers
 
     private async Task<bool> SetTimeOut()
     {
-      await Task.Delay(50);
+      await Task.Delay(0);
       return true;
     }
 

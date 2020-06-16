@@ -8,7 +8,7 @@ namespace MyAppBack.Dtos
     public int Id { get; set; }
 
     [Required]
-    public string ProductName { get; set; }
+    public string Name { get; set; }
 
     [Required]
     [Range(1, int.MaxValue, ErrorMessage = "Цена должна быть больше 1 рубля")]
@@ -26,5 +26,7 @@ namespace MyAppBack.Dtos
 
     [Required]
     public string Region { get; set; }
+    [Required]
+    public int GuId { get; set; }
   }
 }

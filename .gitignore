@@ -4,3 +4,9 @@ obj
 *.db
 *.png
 *.md
+*.db
+appsettings.json
+wwwroot
+publish
+Data
+Migrations

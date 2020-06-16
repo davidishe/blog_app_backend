@@ -1,11 +1,8 @@
 using System;
-using System.Collections.Generic;
-using System.Linq;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
-using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using Microsoft.Extensions.Logging;
@@ -13,7 +10,6 @@ using MyAppBack.Data;
 using MyAppBack.Data.Contexts;
 using MyAppBack.Data.SeedData;
 using MyAppBack.Identity;
-using MyAppBack.Models;
 
 namespace MyAppBack
 {
@@ -54,7 +50,8 @@ namespace MyAppBack
         Host.CreateDefaultBuilder(args)
             .ConfigureWebHostDefaults(webBuilder =>
             {
-              webBuilder.UseStartup<Startup>();
+              webBuilder.UseStartup<Startup>().
+                UseUrls("http://localhost:5030");
             });
   }
 }

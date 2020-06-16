@@ -9,13 +9,14 @@ namespace MyAppBack.Models.OrderAggregate
     {
     }
 
-    public Order(string byerEmail, Address shipToAddress, DeliveryMethod deliveryMethod, IReadOnlyList<OrderItem> orderItems, int subtotal)
+    public Order(string byerEmail, Address shipToAddress, DeliveryMethod deliveryMethod, IReadOnlyList<OrderItem> orderItems, int subtotal, string paymentIntentId)
     {
       ByerEmail = byerEmail;
       ShipToAddress = shipToAddress;
       DeliveryMethod = deliveryMethod;
       OrderItems = orderItems;
       Subtotal = subtotal;
+      PaymentIntentId = paymentIntentId;
     }
 
     public string ByerEmail { get; set; }

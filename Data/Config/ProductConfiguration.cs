@@ -10,17 +10,15 @@ namespace MyAppBack.Data.Config
     {
       builder.Property(p => p.Id).IsRequired();
       builder.Property(p => p.Name).IsRequired().HasMaxLength(100);
-      builder.Property(p => p.Description).IsRequired().HasMaxLength(200);
-      builder.Property(p => p.ProductPrice).IsRequired();
+      builder.Property(p => p.Description).IsRequired();
+      builder.Property(p => p.Price).IsRequired();
       builder.Property(p => p.PictureUrl).IsRequired();
       builder.Property(p => p.Quantity);
-      builder.Property(p => p.ProductIsSelected);
       builder.Property(p => p.GuId).IsRequired();
       builder.Property(p => p.EnrolledDate).IsRequired();
 
-      builder.HasOne(b => b.ProductType).WithMany().HasForeignKey(p => p.ProductTypeId);
-      builder.HasOne(b => b.ProductRegion).WithMany().HasForeignKey(p => p.ProductRegionId);
-
+      builder.HasOne(b => b.Type).WithMany().HasForeignKey(p => p.ProductTypeId);
+      builder.HasOne(b => b.Region).WithMany().HasForeignKey(p => p.ProductRegionId);
 
     }
   }

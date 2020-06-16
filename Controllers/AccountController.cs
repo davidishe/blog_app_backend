@@ -7,7 +7,7 @@ using MyAppBack.Dtos;
 using MyAppBack.Errors;
 using MyAppBack.Extensionss;
 using MyAppBack.Identity;
-using MyAppBack.Services.Token;
+using MyAppBack.Services.TokenService;
 
 namespace MyAppBack.Controllers
 {
@@ -69,7 +69,6 @@ namespace MyAppBack.Controllers
       if (result.Succeeded) return Ok(_mapper.Map<Address, AddressDto>(user.Address));
       return BadRequest("Problem when updating the user");
     }
-
 
     [HttpPost]
     [AllowAnonymous]

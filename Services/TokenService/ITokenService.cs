@@ -1,6 +1,6 @@
 using MyAppBack.Identity;
 
-namespace MyAppBack.Services.Token
+namespace MyAppBack.Services.TokenService
 {
   public interface ITokenService
   {

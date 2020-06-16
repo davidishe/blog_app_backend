@@ -1,0 +1,229 @@
+[
+    {
+        "id": 1,
+        "comment": "Комментарий какой-то первый",
+        "parentId": null,
+        "parentNode": null,
+        "subNodes": [
+            {
+                "id": 3,
+                "comment": "Комментарий к комментарию 1",
+                "parentId": 1,
+                "subNodes": []
+            },
+            {
+                "id": 4,
+                "comment": "Комментарий 2 к комментарию 1",
+                "parentId": 1,
+                "subNodes": []
+            }
+        ]
+    },
+    {
+        "id": 2,
+        "comment": "Комментарий какой-то второй",
+        "parentId": null,
+        "parentNode": null,
+        "subNodes": []
+    },
+    {
+        "id": 3,
+        "comment": "Комментарий к комментарию 1",
+        "parentId": 1,
+        "parentNode": {
+            "id": 1,
+            "comment": "Комментарий какой-то первый",
+            "parentId": null,
+            "parentNode": null,
+            "subNodes": [
+                {
+                    "id": 4,
+                    "comment": "Комментарий 2 к комментарию 1",
+                    "parentId": 1,
+                    "subNodes": []
+                }
+            ]
+        },
+        "subNodes": []
+    },
+    {
+        "id": 4,
+        "comment": "Комментарий 2 к комментарию 1",
+        "parentId": 1,
+        "parentNode": {
+            "id": 1,
+            "comment": "Комментарий какой-то первый",
+            "parentId": null,
+            "parentNode": null,
+            "subNodes": [
+                {
+                    "id": 3,
+                    "comment": "Комментарий к комментарию 1",
+                    "parentId": 1,
+                    "subNodes": []
+                }
+            ]
+        },
+        "subNodes": []
+    },
+    {
+        "id": 5,
+        "comment": "Комментарий базовый 2",
+        "parentId": null,
+        "parentNode": null,
+        "subNodes": [
+            {
+                "id": 6,
+                "comment": "Комментарий 1 к базовому комментарию 2",
+                "parentId": 5,
+                "subNodes": []
+            },
+            {
+                "id": 7,
+                "comment": "Комментарий 2 к базовому комментарию 2",
+                "parentId": 5,
+                "subNodes": []
+            },
+            {
+                "id": 8,
+                "comment": "Комментарий 3 к базовому комментарию 2",
+                "parentId": 5,
+                "subNodes": []
+            },
+            {
+                "id": 9,
+                "comment": "Комментарий 4 к базовому комментарию 2",
+                "parentId": 5,
+                "subNodes": []
+            }
+        ]
+    },
+    {
+        "id": 6,
+        "comment": "Комментарий 1 к базовому комментарию 2",
+        "parentId": 5,
+        "parentNode": {
+            "id": 5,
+            "comment": "Комментарий базовый 2",
+            "parentId": null,
+            "parentNode": null,
+            "subNodes": [
+                {
+                    "id": 7,
+                    "comment": "Комментарий 2 к базовому комментарию 2",
+                    "parentId": 5,
+                    "subNodes": []
+                },
+                {
+                    "id": 8,
+                    "comment": "Комментарий 3 к базовому комментарию 2",
+                    "parentId": 5,
+                    "subNodes": []
+                },
+                {
+                    "id": 9,
+                    "comment": "Комментарий 4 к базовому комментарию 2",
+                    "parentId": 5,
+                    "subNodes": []
+                }
+            ]
+        },
+        "subNodes": []
+    },
+    {
+        "id": 7,
+        "comment": "Комментарий 2 к базовому комментарию 2",
+        "parentId": 5,
+        "parentNode": {
+            "id": 5,
+            "comment": "Комментарий базовый 2",
+            "parentId": null,
+            "parentNode": null,
+            "subNodes": [
+                {
+                    "id": 6,
+                    "comment": "Комментарий 1 к базовому комментарию 2",
+                    "parentId": 5,
+                    "subNodes": []
+                },
+                {
+                    "id": 8,
+                    "comment": "Комментарий 3 к базовому комментарию 2",
+                    "parentId": 5,
+                    "subNodes": []
+                },
+                {
+                    "id": 9,
+                    "comment": "Комментарий 4 к базовому комментарию 2",
+                    "parentId": 5,
+                    "subNodes": []
+                }
+            ]
+        },
+        "subNodes": []
+    },
+    {
+        "id": 8,
+        "comment": "Комментарий 3 к базовому комментарию 2",
+        "parentId": 5,
+        "parentNode": {
+            "id": 5,
+            "comment": "Комментарий базовый 2",
+            "parentId": null,
+            "parentNode": null,
+            "subNodes": [
+                {
+                    "id": 6,
+                    "comment": "Комментарий 1 к базовому комментарию 2",
+                    "parentId": 5,
+                    "subNodes": []
+                },
+                {
+                    "id": 7,
+                    "comment": "Комментарий 2 к базовому комментарию 2",
+                    "parentId": 5,
+                    "subNodes": []
+                },
+                {
+                    "id": 9,
+                    "comment": "Комментарий 4 к базовому комментарию 2",
+                    "parentId": 5,
+                    "subNodes": []
+                }
+            ]
+        },
+        "subNodes": []
+    },
+    {
+        "id": 9,
+        "comment": "Комментарий 4 к базовому комментарию 2",
+        "parentId": 5,
+        "parentNode": {
+            "id": 5,
+            "comment": "Комментарий базовый 2",
+            "parentId": null,
+            "parentNode": null,
+            "subNodes": [
+                {
+                    "id": 6,
+                    "comment": "Комментарий 1 к базовому комментарию 2",
+                    "parentId": 5,
+                    "subNodes": []
+                },
+                {
+                    "id": 7,
+                    "comment": "Комментарий 2 к базовому комментарию 2",
+                    "parentId": 5,
+                    "subNodes": []
+                },
+                {
+                    "id": 8,
+                    "comment": "Комментарий 3 к базовому комментарию 2",
+                    "parentId": 5,
+                    "subNodes": []
+                }
+            ]
+        },
+        "subNodes": []
+    }
+]

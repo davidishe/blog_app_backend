@@ -6,5 +6,7 @@ namespace MyAppBack.Identity
   {
     public string DisplayName { get; set; }
     public Address Address { get; set; }
+    public string? UserDescription { get; set; }
+    public string? UserPhoto { get; set; }
   }
 }

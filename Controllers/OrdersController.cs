@@ -31,7 +31,8 @@ namespace MyAppBack.Controllers
       var order = await _orderService.CreateOrderAsync(email, orderDto.DeliveryMethodId, orderDto.BasketId, address);
 
       if (order == null) return BadRequest(new ApiResponse(400, "Проблема при создании заказа"));
-      return Ok(order);
+      var orderToReturnDto = _mapper.Map<Order, OrderToReturnDto>(order);
+      return Ok(orderToReturnDto);
 
     }
 
