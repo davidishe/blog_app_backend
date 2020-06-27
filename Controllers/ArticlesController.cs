@@ -40,6 +40,21 @@ namespace MyAppBack.Controllers
       return Ok(new Pagination<ArticleToReturnDto>(userParams.PageIndex, userParams.PageSize, totalItems, data));
     }
 
+    [AllowAnonymous]
+    [HttpGet("{id}")]
+    [Route("article")]
+    public async Task<ActionResult<ArticleToReturnDto>> GetArticleByIdAsync([FromQuery] int id)
+    {
+      var spec = new ArticlesSpecification(id);
+      var article = await _articlesRepo.GetEntityWithSpec(spec);
+
+      await SetTimeOut();
+      var articleToReturn = _mapper.Map<Article, ArticleToReturnDto>(article);
+      var comments = articleToReturn.Comments.Where(z => z.ParentId == null).ToList();
+      articleToReturn.Comments = comments;
+      return Ok(articleToReturn);
+
+    }
 
 
     private async Task<bool> SetTimeOut()

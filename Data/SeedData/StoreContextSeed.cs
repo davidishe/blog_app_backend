@@ -32,11 +32,10 @@ namespace MyAppBack.Data.SeedData
 
         if (!context.Comments.Any())
         {
-          var commentData = File.ReadAllText(path + @"/Data/SeedData/Source/nodes.json");
+          var commentData = File.ReadAllText(path + @"/Data/SeedData/Source/comments.json");
           var comments = JsonSerializer.Deserialize<List<Comment>>(commentData);
           foreach (var item in comments)
           {
-
             context.Comments.Add(item);
           }
           await context.SaveChangesAsync();

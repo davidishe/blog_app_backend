@@ -36,9 +36,12 @@ namespace MyAppBack.Helpers
       // .ForMember(d => d.CommentReplyDto, m => m.MapFrom(s => s.ArticleCommentReply)).ReverseMap();
 
       CreateMap<Article, ArticleToReturnDto>()
+        // .ForMember(d => d.Comments, m => m.MapFrom(s => s.Comments.ToArray()));
         .ForMember(d => d.Comments, m => m.MapFrom(s => s.Comments.ToArray()));
 
+
       CreateMap<Comment, CommentToReturnDto>();
+
 
     }
   }

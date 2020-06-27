@@ -10,3 +10,4 @@ wwwroot
 publish
 Data
 Migrations
+node_modules

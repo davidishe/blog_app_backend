@@ -23,6 +23,8 @@ namespace MyAppBack.Models.Articles
 
     [Required(ErrorMessage = "Комментарий не должен быть пустым")]
     public string CommentText { get; set; }
+    public string CommentAuthorName { get; set; }
+    public string CommentAuthorId { get; set; }
     public int? ParentId { get; set; }
     public virtual Comment? ParentComment { get; set; }
     public ICollection<Comment>? SubComments { get; set; }

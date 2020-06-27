@@ -37,7 +37,8 @@ namespace MyAppBack.Controllers
       {
         Email = user.Email,
         Token = _tokenService.CreateToken(user),
-        DisplayName = user.DisplayName
+        DisplayName = user.DisplayName,
+        Id = user.Id
       };
     }
 
